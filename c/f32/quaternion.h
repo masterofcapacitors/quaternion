@@ -2,108 +2,108 @@
 #ifndef QUATERNION_H
 #define QUATERNION_H
 
-struct Vector3;
-typedef struct Vector3 Vector3;
-
-struct Matrix;
-typedef struct Matrix Matrix;
-
-typedef struct Quaternion {
-    float x, y, z, w;
-} Quaternion;
-
+#include <stddef.h>
+#include "types.h"
 
 // Constructors
 
-const Quaternion quaternion_new(
+Quaternion quaternion_new(
     const float x, 
     const float y, 
     const float z, 
     const float w
 );
 
-const Quaternion quaternion_from_axis_angle(
+Quaternion quaternion_from_axis_angle(
     const Vector3* axis, 
     const float angle
 );
 
-const Quaternion quaternion_from_axis_angle_fast(
+Quaternion quaternion_from_axis_angle_fast(
     const Vector3* axis, 
     const float angle
 );
 
-const Quaternion quaternion_from_euler_vector(
+Quaternion quaternion_from_euler_vector(
    const Vector3* euler_vector
 );
 
-const Quaternion quaternion_from_matrix(
+Quaternion quaternion_from_matrix(
     const Matrix* matrix
 );
 
-const Quaternion quaternion_from_matrix_fast(
+Quaternion quaternion_from_matrix_fast(
     const Matrix* matrix
 );
 
-const Quaternion quaternion_from_vectors(
+Quaternion quaternion_from_vectors(
     const Vector3* vx,
     const Vector3* vy,
     const Vector3* vz
 );
 
-const Quaternion quaternion_from_vectors_fast(
+Quaternion quaternion_from_vectors_fast(
     const Vector3* vX,
     const Vector3* vY,
     const Vector3* vZ
 );
 
-const Quaternion quaternion_look_at(
+Quaternion quaternion_look_at(
     const Vector3* from,
     const Vector3* look_at,
     const Vector3* up
 );
 
-const Quaternion quaternion_from_euler_angles_xyz(
+Quaternion quaternion_from_euler_angles_xyz(
     const float rx,
     const float ry,
     const float rz
 );
 
-const Quaternion quaternion_from_euler_angles_xzy(
+Quaternion quaternion_from_euler_angles_xzy(
     const float rx,
     const float ry,
     const float rz
 );
 
-const Quaternion quaternion_from_euler_angles_yxz(
+Quaternion quaternion_from_euler_angles_yxz(
     const float rx,
     const float ry,
     const float rz
 );
 
-const Quaternion quaternion_from_euler_angles_yzx(
+Quaternion quaternion_from_euler_angles_yzx(
     const float rx,
     const float ry,
     const float rz
 );
 
-const Quaternion quaternion_from_euler_angles_zxy(
+Quaternion quaternion_from_euler_angles_zxy(
     const float rx,
     const float ry,
     const float rz
 );
 
-const Quaternion quaternion_from_euler_angles_zyx(
+Quaternion quaternion_from_euler_angles_zyx(
     const float rx,
     const float ry,
     const float rz
 );
 
-const Quaternion quaternion_from_vector(
+Quaternion quaternion_from_vector(
     const Vector3* vector,
     const float w
 );
 
-const Quaternion quaternion_random();
+float random_float();
+float random_float_r(void* seed);
+
+Quaternion quaternion_random(float (*random_float_generator)());
+
+Quaternion quaternion_random_state(
+    float (*random_float_generator)(void*), 
+    void* state
+);
 
 
 // Constants
@@ -114,31 +114,31 @@ extern const Quaternion QUATERNION_ZERO;
 
 // Operations
 
-const Quaternion quaternion_add(
+Quaternion quaternion_add(
     const Quaternion* q0,
     const Quaternion* q1
 );
 
-const Quaternion quaternion_sub(
+Quaternion quaternion_sub(
     const Quaternion* q0,
     const Quaternion* q1
 );
 
-const Quaternion quaternion_mul(
+Quaternion quaternion_mul(
     const Quaternion* q0,
     const Quaternion* q1
 );
 
-const Quaternion quaternion_div(
+Quaternion quaternion_div(
     const Quaternion* q0,
     const Quaternion* q1
 );
 
-const Quaternion quaternion_unm(
+Quaternion quaternion_unm(
     const Quaternion* q0
 );
 
-const Quaternion quaternion_pow(
+Quaternion quaternion_pow(
     const Quaternion* q0,
     const float pow
 );
@@ -158,17 +158,17 @@ int quaternion_eq(
     const Quaternion* q1
 );
 
-const Quaternion quaternion_scale(
+Quaternion quaternion_scale(
     const Quaternion* q0,
     const float scale
 );
 
-const Quaternion quaternion_mul_matrix_l(
+Quaternion quaternion_mul_matrix_l(
     const Quaternion* q0,
     const Matrix* matrix
 );
 
-const Quaternion quaternion_mul_matrix_r(
+Quaternion quaternion_mul_matrix_r(
     const Matrix* matrix,
     const Quaternion* q0
 );
@@ -178,12 +178,12 @@ Vector3 quaternion_rotate_vector(
     const Vector3* vector
 );
 
-const Quaternion quaternion_combine_imaginary(
+Quaternion quaternion_combine_imaginary(
     const Quaternion* q0,
     const Vector3* vector
 );
 
-const Quaternion quaternion_scale_inv(
+Quaternion quaternion_scale_inv(
     const Quaternion* q0,
     const float scale
 );
@@ -191,7 +191,7 @@ const Quaternion quaternion_scale_inv(
 
 // Methods
 
-const Quaternion quaternion_unit(
+Quaternion quaternion_unit(
     const Quaternion* q0
 );
 
@@ -207,30 +207,30 @@ float quaternion_length_squared(
     const Quaternion* q0
 );
 
-const Quaternion quaternion_exp(
+Quaternion quaternion_exp(
     const Quaternion* q0
 );
 
-const Quaternion quaternion_exp_map(
+Quaternion quaternion_exp_map(
     const Quaternion* q0,
     const Quaternion* q1
 );
 
-const Quaternion quaternion_exp_map_sym(
+Quaternion quaternion_exp_map_sym(
     const Quaternion* q0,
     const Quaternion* q1
 );
 
-const Quaternion quaternion_log(
+Quaternion quaternion_log(
     const Quaternion* q0
 );
 
-const Quaternion quaternion_log_map(
+Quaternion quaternion_log_map(
     const Quaternion* q0,
     const Quaternion* q1
 );
 
-const Quaternion quaternion_log_map_sym(
+Quaternion quaternion_log_map_sym(
     const Quaternion* q0,
     const Quaternion* q1
 );
@@ -239,7 +239,7 @@ float quaternion_hypot(
     const Quaternion* q0
 );
 
-const Quaternion quaternion_normalize(
+Quaternion quaternion_normalize(
     const Quaternion* q0
 );
 
@@ -252,19 +252,19 @@ float quaternion_dot(
     const Quaternion* q1
 );
 
-const Quaternion quaternion_conjugate(
+Quaternion quaternion_conjugate(
     const Quaternion* q0
 );
 
-const Quaternion quaternion_inverse(
+Quaternion quaternion_inverse(
     const Quaternion* q0
 );
 
-const Quaternion quaternion_negate(
+Quaternion quaternion_negate(
     const Quaternion* q0
 );
 
-const Quaternion quaternion_difference(
+Quaternion quaternion_difference(
     const Quaternion* q0,
     const Quaternion* q1
 );
@@ -289,13 +289,13 @@ float quaternion_distance_abs(
     const Quaternion* q1
 );
 
-const Quaternion quaternion_slerp(
+Quaternion quaternion_slerp(
     const Quaternion* q0,
     const Quaternion* q1,
     const float alpha
 );
 
-const Quaternion quaternion_slerp_identity(
+Quaternion quaternion_slerp_identity(
     const Quaternion* q1,
     const float alpha
 );
@@ -315,9 +315,14 @@ void quaternion_slerp_function_init(
     struct SlerpState* out_slerp_state
 );
 
-const Quaternion quaternion_slerp_function(
+Quaternion quaternion_slerp_function(
     const struct SlerpState* slerp_state,
     const float alpha
+);
+
+size_t quaternion_get_intermediates_count(
+    const size_t number,
+    const int include_endpoints
 );
 
 void quaternion_intermediates(
@@ -325,27 +330,27 @@ void quaternion_intermediates(
     const Quaternion* q1,
     const size_t number,
     const int include_endpoints,
-    Quaternion** out_intermediates
+    Quaternion out_intermediates[]
 );
 
-const Quaternion quaternion_derivative(
+Quaternion quaternion_derivative(
     const Quaternion* q0,
     const Vector3* rate
 );
 
-const Quaternion quaternion_integrate(
+Quaternion quaternion_integrate(
     const Quaternion* q0,
-    const Vector3*,
+    const Vector3* rate,
     const float timestep
 );
 
-const Quaternion quaternion_angular_velocity(
+Quaternion quaternion_angular_velocity(
     const Quaternion* q0,
     const Quaternion* q1,
     const float timestep
 );
 
-const Quaternion quaternion_minimal_rotation(
+Quaternion quaternion_minimal_rotation(
     const Quaternion* q0,
     const Quaternion* q1
 );
@@ -381,70 +386,51 @@ float quaternion_to_axis_angle(
     Vector3* out_axis
 );
 
-void quaternion_to_euler_vector(
-    const Quaternion* q0,
-    Vector3* out
+Vector3 quaternion_to_euler_vector(
+    const Quaternion* q0
 );
 
-void quaternion_to_euler_angles_xyz(
-    const Quaternion* q0,
-    float* out_rx,
-    float* out_ry,
-    float* out_rz
+EulerAngles quaternion_to_euler_angles_xyz(
+    const Quaternion* q0
 );
 
-void quaternion_to_euler_angles_xzy(
-    const Quaternion* q0,
-    float* out_rx,
-    float* out_ry,
-    float* out_rz
+EulerAngles quaternion_to_euler_angles_xzy(
+    const Quaternion* q0
 );
 
-void quaternion_to_euler_angles_yxz(
-    const Quaternion* q0,
-    float* out_rx,
-    float* out_ry,
-    float* out_rz
+EulerAngles quaternion_to_euler_angles_yxz(
+    const Quaternion* q0
 );
 
-void quaternion_to_euler_angles_yzx(
-    const Quaternion* q0,
-    float* out_rx,
-    float* out_ry,
-    float* out_rz
+EulerAngles quaternion_to_euler_angles_yzx(
+    const Quaternion* q0
 );
 
-void quaternion_to_euler_angles_zxy(
-    const Quaternion* q0,
-    float* out_rx,
-    float* out_ry,
-    float* out_rz
+EulerAngles quaternion_to_euler_angles_zxy(
+    const Quaternion* q0
 );
 
-void quaternion_to_euler_angles_zyx(
-    const Quaternion* q0,
-    float* out_rx,
-    float* out_ry,
-    float* out_rz
+EulerAngles quaternion_to_euler_angles_zyx(
+    const Quaternion* q0
 );
 
-void quaternion_vector(
-    const Quaternion* q0,
-    Vector3* out
+Vector3 quaternion_vector(
+    const Quaternion* q0
 );
 
 float quaternion_scalar(
     const Quaternion* q0
 );
 
-const Quaternion quaternion_imaginary(
+Quaternion quaternion_imaginary(
     const Quaternion* q0
 );
 
 // CALLER IS RESPONSIBLE FOR FREEING
 char* quaternion_to_string(
     const Quaternion* q0,
-    const unsigned int decimal_places
+    const unsigned int decimal_places,
+    const char formatter
 );
 
 #endif
