@@ -14,13 +14,18 @@ void print_quaternion(const Quaternion* q0, unsigned int decimal_places) {
     }
 }
 
-static const float NaN = 0.0f / 0.0f;
-static const float POS_INF = 1.0f / 0.0f;
-static const float NEG_INF = -1.0f / 0.0f;
+//static const float NaN = 0.0f / 0.0f;
+//static const float POS_INF = 1.0f / 0.0f;
+//static const float NEG_INF = -1.0f / 0.0f;
 
 int main(int argc, char** argv) {
+    Quaternion q0 = quaternion_random(&random_float);
+    Quaternion q1 = quaternion_random(&random_float);
+    Quaternion q2 = quaternion_mul(&q0, &q1);
     
+    print_quaternion(&q2, 6);
     
+    /* 
     Quaternion test_cases[] = {
         quaternion_new(0, 0, 0, 1),
         quaternion_new(-0.5, -0.5, -0.5, -0.5),
@@ -41,7 +46,7 @@ int main(int argc, char** argv) {
     }
     
     print_quaternion(NULL, 6);
-    
+    */
     
 }
 

@@ -73,6 +73,22 @@ Quaternion quaternion_random_state(
 }
 
 
+Quaternion quaternion_mul(
+    const Quaternion* q0,
+    const Quaternion* q1
+) {
+    Quaternion out = {
+        q0->w * q1->x + q0->x * q1->w + q0->y * q1->z - q0->z * q1->y,
+        q0->w * q1->y - q0->x * q1->z + q0->y * q1->w + q0->z * q1->x,
+        q0->w * q1->z + q0->x * q1->y - q0->y * q1->x + q0->z * q1->w,
+        q0->w * q1->w - q0->x * q1->x - q0->y * q1->y - q0->z * q1->z
+    };
+    
+    return out;
+}
+
+
+
 #define QUATERNION_NULL "NULL"
 #define QUATERNION_NULL_SIZE sizeof(QUATERNION_NULL)
 #define MAXIMUM_DECIMAL_PLACES 20
@@ -124,7 +140,6 @@ char* quaternion_to_string(
     }
     
     if (write_size < buffer_size) {
-        printf("fits\n");
         return buffer;
     }
     
