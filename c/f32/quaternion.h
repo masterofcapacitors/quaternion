@@ -5,27 +5,37 @@
 #include <stddef.h>
 #include "types.h"
 
+
+// Constants
+
+extern const Quaternion QUATERNION_IDENTITY;
+extern const Quaternion QUATERNION_ZERO;
+
 // Constructors
 
-Quaternion quaternion_new(
+static inline Quaternion quaternion_new(
     const float x, 
     const float y, 
     const float z, 
     const float w
-);
+) {
+    return (Quaternion) { x, y, z, w };
+}
 
 Quaternion quaternion_from_axis_angle(
     const Vector3* axis, 
     const float angle
 );
 
-Quaternion quaternion_from_axis_angle_fast(
+Quaternion quaternion_from_axis_angle_safe(
     const Vector3* axis, 
+    const float epsilon,
     const float angle
 );
 
 Quaternion quaternion_from_euler_vector(
-   const Vector3* euler_vector
+   const Vector3* euler_vector,
+   const float epsilon
 );
 
 Quaternion quaternion_from_matrix(
@@ -106,10 +116,7 @@ Quaternion quaternion_random_state(
 );
 
 
-// Constants
 
-extern const Quaternion QUATERNION_IDENTITY;
-extern const Quaternion QUATERNION_ZERO;
 
 
 // Operations

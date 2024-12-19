@@ -2,11 +2,11 @@
 #define TYPES_H
 
 typedef struct Quaternion {
-    const float x, y, z, w;
+    float x, y, z, w;
 } Quaternion;
 
 typedef struct EulerAngles {
-    const float x, y, z;
+    float x, y, z;
 } EulerAngles;
 
 typedef struct Vector3 {
@@ -14,10 +14,7 @@ typedef struct Vector3 {
 } Vector3;
 
 typedef struct Matrix {
-    float r00, r01, r02, tx,
-          r10, r11, r12, ty,
-          r20, r21, r22, tz,
-           h1,  h2,  h3, h4;
+    float matrix[4][4];
 } Matrix;
 
 #endif

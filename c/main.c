@@ -1,7 +1,10 @@
-#include "c/f32/quaternion.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+
+#include "f32/quaternion.h"
+#include "f32/vector3.h"
+
 
 
 void print_quaternion(const Quaternion* q0, unsigned int decimal_places) {
@@ -14,18 +17,15 @@ void print_quaternion(const Quaternion* q0, unsigned int decimal_places) {
     }
 }
 
-//static const float NaN = 0.0f / 0.0f;
-//static const float POS_INF = 1.0f / 0.0f;
-//static const float NEG_INF = -1.0f / 0.0f;
+// Turn into "//*" to remove comment
+/*
+static const float NaN = 0.0f / 0.0f;
+static const float POS_INF = 1.0f / 0.0f;
+static const float NEG_INF = -1.0f / 0.0f;
 
-int main(int argc, char** argv) {
-    Quaternion q0 = quaternion_random(&random_float);
-    Quaternion q1 = quaternion_random(&random_float);
-    Quaternion q2 = quaternion_mul(&q0, &q1);
+void run_test_cases() {
+    const unsigned int decimal_places = 1;
     
-    print_quaternion(&q2, 6);
-    
-    /* 
     Quaternion test_cases[] = {
         quaternion_new(0, 0, 0, 1),
         quaternion_new(-0.5, -0.5, -0.5, -0.5),
@@ -42,11 +42,27 @@ int main(int argc, char** argv) {
     
     size_t tests = sizeof(test_cases) / sizeof(Quaternion);
     for (int i = 0; i < tests; i++) {
-        print_quaternion(&(test_cases[i]), 6);
+        print_quaternion(&(test_cases[i]), decimal_places);
     }
     
-    print_quaternion(NULL, 6);
-    */
+    print_quaternion(NULL, decimal_places);
+}
+/**/
+
+int main() { //int argc, char** argv) {
+    Vector3 axis = vector3_new(0, 0, 1);
+    const float angle = 30.0f;
+    
+    Quaternion faa = quaternion_from_axis_angle(&axis, angle);
+    Quaternion fa2 = quaternion_from_axis_angle(&VECTOR3_Y_AXIS, angle);
+    
+    print_quaternion(&faa, 7);
+    print_quaternion(&fa2, 6);
+    
+    fa2 = faa;
+    
+    
+    
     
 }
 
