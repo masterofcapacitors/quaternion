@@ -14,11 +14,11 @@ typedef struct ALIGN(16) Quaternion {
     float x, y, z, w;
 } Quaternion;
 
-typedef struct ALIGN(16) EulerAngles {
+typedef struct EulerAngles {
     float x, y, z;
 } EulerAngles;
 
-typedef struct Vector3 {
+typedef struct ALIGN(16) Vector3 {
     float x, y, z;
 } Vector3;
 
