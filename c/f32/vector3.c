@@ -2,15 +2,6 @@
 
 #include <math.h>
 
-const Vector3 VECTOR3_ZERO    = {0.0f, 0.0f, 0.0f};
-const Vector3 VECTOR3_ONE     = {1.0f, 1.0f, 1.0f};
-const Vector3 VECTOR3_X_AXIS  = {1.0f, 0.0f, 0.0f};
-const Vector3 VECTOR3_Y_AXIS  = {0.0f, 1.0f, 0.0f};
-const Vector3 VECTOR3_Z_AXIS  = {0.0f, 0.0f, 1.0f};
-const Vector3 VECTOR3_XY_AXIS = {1.0f, 1.0f, 0.0f};
-const Vector3 VECTOR3_YZ_AXIS = {0.0f, 1.0f, 1.0f};
-const Vector3 VECTOR3_XZ_AXIS = {1.0f, 0.0f, 1.0f};
-
 
 float vector3_magnitude(
     const Vector3* vector

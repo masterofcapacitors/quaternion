@@ -3,15 +3,6 @@
 
 #include "types.h"
 
-extern const Vector3 VECTOR3_ZERO;
-extern const Vector3 VECTOR3_ONE;
-extern const Vector3 VECTOR3_X_AXIS;
-extern const Vector3 VECTOR3_Y_AXIS;
-extern const Vector3 VECTOR3_Z_AXIS;
-extern const Vector3 VECTOR3_XY_AXIS;
-extern const Vector3 VECTOR3_YZ_AXIS;
-extern const Vector3 VECTOR3_XZ_AXIS;
-
 static inline Vector3 vector3_new(
     const float x, 
     const float y, 
@@ -19,8 +10,6 @@ static inline Vector3 vector3_new(
 ) {
     return (Vector3) {x, y, z};
 }
-
-
 
 float vector3_magnitude(
     const Vector3* vector
@@ -37,14 +26,19 @@ Vector3 vector3_unit_default(
 );
 
 
-Vector3 vector3_mul(
+Vector3 vector3_add(
+    const Vector3* v0,
+    const Vector3* v1
+);
+
+Vector3 vector3_scale(
     const Vector3* vector,
-    float scalar
+    const float scalar
 );
 
 Vector3 vector3_div(
     const Vector3* vector,
-    float scalar
+    const float scalar
 );
 
 

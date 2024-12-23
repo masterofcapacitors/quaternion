@@ -22,6 +22,15 @@ typedef struct ALIGN(16) Vector3 {
     float x, y, z;
 } Vector3;
 
+static const Vector3 VECTOR3_ZERO    = {0.0f, 0.0f, 0.0f};
+static const Vector3 VECTOR3_ONE     = {1.0f, 1.0f, 1.0f};
+static const Vector3 VECTOR3_X_AXIS  = {1.0f, 0.0f, 0.0f};
+static const Vector3 VECTOR3_Y_AXIS  = {0.0f, 1.0f, 0.0f};
+static const Vector3 VECTOR3_Z_AXIS  = {0.0f, 0.0f, 1.0f};
+static const Vector3 VECTOR3_XY_AXIS = {1.0f, 1.0f, 0.0f};
+static const Vector3 VECTOR3_YZ_AXIS = {0.0f, 1.0f, 1.0f};
+static const Vector3 VECTOR3_XZ_AXIS = {1.0f, 0.0f, 1.0f};
+
 typedef struct ALIGN(16) Matrix {
     float matrix[4][4];
 } Matrix;

@@ -26,7 +26,7 @@ Quaternion quaternion_from_axis_angle(
     const float angle
 ) {
     float ha = angle / 2;
-    Vector3 shaxis = vector3_mul(axis, sinf(ha));
+    Vector3 shaxis = vector3_scale(axis, sinf(ha));
     float qx = shaxis.x;
     float qy = shaxis.y;
     float qz = shaxis.z;
@@ -44,7 +44,7 @@ Quaternion quaternion_from_axis_angle_safe(
     Vector3 unit_axis = vector3_unit_default(axis, epsilon, &VECTOR3_X_AXIS);
     
     float ha = angle / 2;
-    Vector3 shaxis = vector3_mul(&unit_axis, sinf(ha));
+    Vector3 shaxis = vector3_scale(&unit_axis, sinf(ha));
     float qx = shaxis.x;
     float qy = shaxis.y;
     float qz = shaxis.z;

@@ -22,6 +22,12 @@ static inline Quaternion quaternion_new(
     return (Quaternion) { x, y, z, w };
 }
 
+static inline Quaternion quaternion_copy(
+    const Quaternion* self
+) {
+    return (Quaternion) { self->x, self->y, self->z, self->w };
+}
+
 Quaternion quaternion_from_axis_angle(
     const Vector3* axis, 
     const float angle

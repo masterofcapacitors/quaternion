@@ -19,14 +19,23 @@ typedef struct QuaternionSpring {
 } QuaternionSpring;
 
 
-void quaternion_spring_new(
-    const Quaternion* intial,
+static inline void quaternion_spring_new(
+    const Quaternion* initial,
     const float damping,
     const float speed,
     double (*clock)(void*),
     void* clock_state,
     QuaternionSpring* out_spring
-);
+) {
+    out_spring->position = *initial;
+    out_spring->target = *initial;
+    out_spring->velocity = VECTOR3_ZERO;
+    out_spring->damping = damping;
+    out_spring->speed = speed;
+    out_spring->clock = clock;
+    out_spring->clock_state = clock_state;
+    out_spring->_time = clock(clock_state);
+}
 
 
 void quaternion_spring_evaluate(
