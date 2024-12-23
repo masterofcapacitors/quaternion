@@ -10,6 +10,7 @@
 typedef struct QuaternionSpring {
     Quaternion position;
     Quaternion target;
+    Quaternion _initial;
     Vector3 velocity;
     float damping;
     float speed;
@@ -29,6 +30,7 @@ static inline void quaternion_spring_new(
 ) {
     out_spring->position = *initial;
     out_spring->target = *initial;
+    out_spring->_initial = *initial;
     out_spring->velocity = VECTOR3_ZERO;
     out_spring->damping = damping;
     out_spring->speed = speed;
@@ -37,13 +39,15 @@ static inline void quaternion_spring_new(
     out_spring->_time = clock(clock_state);
 }
 
-
+// Must call to get the latest position/velocity
 void quaternion_spring_evaluate(
-    QuaternionSpring* self
+    QuaternionSpring* self,
+    Quaternion* out_position,
+    Vector3* out_velocity
 );
 
-
-Quaternion quaternion_spring_get_position(
+// needs more testing to confirm behaviour
+void quaternion_spring_evaluate_npv(
     QuaternionSpring* self
 );
 
@@ -57,11 +61,6 @@ void quaternion_spring_set_position(
 void quaternion_spring_set_target(
     QuaternionSpring* self,
     const Quaternion* target
-);
-
-
-Vector3 quaternion_spring_get_velocity(
-    QuaternionSpring* self
 );
 
 
@@ -82,6 +81,12 @@ void quaternion_spring_set_speed(
     const float speed
 );
 
+void quaternion_spring_set_clock(
+    QuaternionSpring* self,
+    const double (*clock)(void*),
+    const void* clock_state
+);
+
 
 void quaternion_spring_reset(
     QuaternionSpring* self,
@@ -91,13 +96,13 @@ void quaternion_spring_reset(
 
 void quaternion_spring_impulse(
     QuaternionSpring* self,
-    Vector3* impulse
+    const Vector3* impulse
 );
 
 
 void quaternion_spring_time_skip(
     QuaternionSpring* self,
-    float delta
+    const double delta
 );
 
 
